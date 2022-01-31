@@ -11,7 +11,10 @@ def call(Map pipelineParams)
         {
             stage("code checkout")
             {
-                new checkoutSCM().call(pipelineParams);
+                sh '''
+                cd $WORKSPACE
+                '''
+                new checkoutSCM().call(pipelineParams)
             }
         }
     }
