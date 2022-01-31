@@ -21,6 +21,7 @@ def call(Map pipelineParams)
             {
                 sh '''
                 cd $REPO
+                npm install
                 docker build -t node_app_image .
                 docker images
                 '''
