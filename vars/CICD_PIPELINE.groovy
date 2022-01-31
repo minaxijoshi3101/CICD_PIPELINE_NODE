@@ -11,6 +11,7 @@ def call(Map pipelineParams)
         {
             stage("code checkout")
             {
+                echo 'Step to checkout the code from github'
                 sh '''
                 cd $WORKSPACE
                 '''
