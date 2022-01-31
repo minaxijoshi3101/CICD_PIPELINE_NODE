@@ -5,6 +5,7 @@ def call(Map pipelineParams)
     env.GIT_GROUP = pipelineParams.GIT_GROUP
     env.REPO = pipelineParams.REPO
     env.BRANCH = pipelineParams.BRANCH
+    env.REGISTRY = pipelineParams.REGISTRY
     pipeline
     {
         node("master")
@@ -30,6 +31,7 @@ def call(Map pipelineParams)
             {
                 echo "stage to push image"
                 sh '''
+                docker tag dockerrepo:latest 431078536743.dkr.ecr.ap-south-1.amazonaws.com/dockerrepo:latest
                 docker image tag node_app_image ${REGISTRY}:node_app_imagev1.0
                 
                 LOGIN=$(aws ecr get-login --no-include-email --region ap-south-1)
