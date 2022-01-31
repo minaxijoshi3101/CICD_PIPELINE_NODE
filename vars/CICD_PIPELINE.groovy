@@ -39,5 +39,17 @@ def call(Map pipelineParams)
                 '''
             }
         }
+        stage("deploy")
+        {
+            echo "pull the image from ECR"
+            sh '''
+            LOGIN=$(aws ecr get-login --no-include-email --region ap-south-1)
+            $LOGIN
+            docker image pull ${REGISTRY}:node_app_imagev1.0
+            docker rm -f node-app-container | error=true
+            docker run -p 40:80 --name node-app-container ${REGISTRY}:node_app_imagev1.0
+            echo "deploy image to a container"
+            '''
+        }
     }
 }
