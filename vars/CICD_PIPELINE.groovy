@@ -19,6 +19,11 @@ def call(Map pipelineParams)
             }
             stage("build code")
             {
+                sh '''
+                cd $REPO
+                docker build -t node_app_image .
+                docker images
+                '''
             }
         }
     }
