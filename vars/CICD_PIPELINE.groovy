@@ -31,9 +31,8 @@ def call(Map pipelineParams)
             {
                 echo "stage to push image"
                 sh '''
-                docker tag dockerrepo:latest 431078536743.dkr.ecr.ap-south-1.amazonaws.com/dockerrepo:latest
+                #docker tag dockerrepo:latest 431078536743.dkr.ecr.ap-south-1.amazonaws.com/dockerrepo:latest
                 docker image tag node_app_image ${REGISTRY}:node_app_imagev1.0
-                
                 LOGIN=$(aws ecr get-login --no-include-email --region ap-south-1)
                 $LOGIN
                 docker push ${REGISTRY}:node_app_imagev1.0
