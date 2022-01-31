@@ -39,6 +39,8 @@ def call(Map pipelineParams)
                 '''
             }
         }
+        node("Dev")
+        {
         stage("deploy")
         {
             echo "pull the image from ECR"
@@ -50,6 +52,7 @@ def call(Map pipelineParams)
             docker run -p 40:80 --name node-app-container ${REGISTRY}:node_app_imagev1.0
             echo "deploy image to a container"
             '''
+        }
         }
     }
 }
