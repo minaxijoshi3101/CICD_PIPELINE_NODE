@@ -17,6 +17,9 @@ def call(Map pipelineParams)
                 '''
                 new checkoutSCM().call(pipelineParams)
             }
+            stage("build code")
+            {
+            }
         }
     }
 }
