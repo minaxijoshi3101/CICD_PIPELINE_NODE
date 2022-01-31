@@ -25,6 +25,17 @@ def call(Map pipelineParams)
                 docker images
                 '''
             }
+            stage("push image to docker ECR")
+            {
+                echo "stage to push image"
+                sh '''
+                docker image tag node_app_image ${REGISTRY}:node_app_imagev1.0
+                
+                LOGIN=$(aws ecr get-login --no-include-email --region ap-south-1)
+                $LOGIN
+                docker push ${REGISTRY}:node_app_imagev1.0
+                '''
+            }
         }
     }
 }
